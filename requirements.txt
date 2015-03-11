@@ -1,0 +1,6 @@
+Unidecode==0.4.17
+-e git://github.com/charlierguo/gmail.git@4626823d3fbf159d242a50b33251576aeddbd9ad#egg=gmail-master
+html5lib==0.999
+python-slugify==0.1.0
+six==1.9.0
+wsgiref==0.1.2
