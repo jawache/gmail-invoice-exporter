@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
+from getpass import getpass
 import os
 import sys
 from slugify import slugify
@@ -62,7 +63,11 @@ def parse_mail(messages):
 def loop_mail(email, password):
     before = datetime(year=2015, month=3, day=1)
     after = datetime(year=2014, month=2, day=28)
-    g = gmail.login(email, password)
+    try:
+        g = gmail.login(email, password)
+    except gmail.AuthenticationError:
+        print "Failed to login to gmail"
+        return -1
     print u"✅  Using smart label\n"
     messages = g.inbox().mail(label="^smartlabel_receipt", before=before, after=after)
     parse_mail(messages)
@@ -79,8 +84,6 @@ def loop_mail(email, password):
 
 
 if __name__ == '__main__':
-    email = sys.argv[1]
-    password = sys.argv[2]
-    print email
-    print password
+    email = raw_input('Email: ')
+    password = getpass()
     loop_mail(email, password)
